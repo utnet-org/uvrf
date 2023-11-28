@@ -3,6 +3,7 @@ use p256::ecdsa::{SigningKey, Signature, signature::Signer};
 use p256::ecdsa::{VerifyingKey, signature::Verifier};
 use elliptic_curve::PublicKey;
 use sha2::{Sha256, Digest};
+use rand::thread_rng;
 
 pub fn generate_key_pair() -> (SigningKey, PublicKey<NistP256>) {
     let signing_key = SigningKey::random(&mut thread_rng());

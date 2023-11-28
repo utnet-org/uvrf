@@ -5,9 +5,9 @@ use std::fs;
 // ... other imports ...
 
 #[derive(Serialize, Deserialize, Debug)]
-struct Candidate {
-    name: String,
-    weight: u32,
+pub struct Candidate {
+    pub address: String,  // Ethereum address as a hex string
+    pub power: u32,       // Renamed from 'weight' to 'power'
 }
 
 pub fn read_candidates_from_file(file_path: &str) -> Result<Vec<Candidate>, serde_json::Error> {
@@ -29,12 +29,12 @@ pub fn hash_to_number(hash: &[u8]) -> u32 {
 }
 
 pub fn choose_candidate_vrf(candidates: &[Candidate], random_number: u32) -> Option<&Candidate> {
-    let total_weight: u32 = candidates.iter().map(|c| c.weight).sum();
+    let total_weight: u32 = candidates.iter().map(|c| c.power).sum();
     let mut weighted_sum = 0;
     let target = random_number % total_weight;
 
     for candidate in candidates {
-        weighted_sum += candidate.weight;
+        weighted_sum += candidate.power;
         if target < weighted_sum {
             return Some(candidate);
         }

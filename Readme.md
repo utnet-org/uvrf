@@ -24,7 +24,7 @@ git clone git@github.com:utnet-org/uvrf.git
 cd uvrf
 ```
 
-## Build the Project
+### Build the Project
 
 Use Cargo to build the project:
 
@@ -33,35 +33,35 @@ cargo build
 ```
 
 
-## Running Tests
+### Running Tests
 
 To run tests, use the following Cargo command:
 
 ```bash
 cargo test
 ```
-### Usage
+## Usage
 
 The main functionalities include key pair generation for VRF, computation of VRF, and the verification of the VRF output. Additionally, the repository provides functionality to read a list of candidates from a JSON file and select one based on their weighted power.
 
-## Key Pair Generation
+### Key Pair Generation
 
 ```rust
 let (sk, pk) = generate_key_pair();
 ```
-## Compute VRF
+### Compute VRF
 
 ```rust
 let vrf_output = compute_vrf(&sk, input);
 ```
 
-## Verify VRF
+### Verify VRF
 
 ```rust
 let is_valid = verify_vrf(&pk, input, &vrf_output);
 ```
 
-## Selecting a Candidate
+### Selecting a Candidate
 
 Candidates are stored in a JSON file in the following format:
 
@@ -87,10 +87,10 @@ cargo test -- --nocapture test_vrf_random_selection_from_file
 The --nocapture flag is used with cargo test to allow the print statements to be displayed on the console. By default, cargo test captures output from test functions, and this flag disables that behavior.
 
 
-### Contributing
+## Contributing
 Contributions to this project are welcome! Please feel free to submit issues and pull requests.
 
-### License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 

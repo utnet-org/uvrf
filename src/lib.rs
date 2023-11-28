@@ -5,13 +5,18 @@ mod vrf;
 mod weighted_selection;
 
 fn main() {
-    // Example integration
+    // Read candidates from json file
     let candidates = read_candidates_from_file("/Library/WebServer/Documents/uvrf/src/Candidates.json")
         .expect("Failed to read candidates");
 
+    // Generate ECC key pairs
     let (sk, _) = generate_key_pair();
     let vrf_input = b"some input";
+
+    // Generate vrf output by input with special string and sign key that generated before
     let vrf_output = generate_random_value_vrf(&sk, vrf_input);
+
+    // Get number by vrf output
     let random_number = hash_to_number(&vrf_output);
 
     if let Some(selected_candidate) = choose_candidate_vrf(&candidates, random_number) {

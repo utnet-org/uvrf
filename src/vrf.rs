@@ -5,6 +5,7 @@ use elliptic_curve::PublicKey;
 use sha2::{Sha256, Digest};
 use rand::thread_rng;
 
+// Generate ECC key pair
 pub fn generate_key_pair() -> (SigningKey, PublicKey<NistP256>) {
     let signing_key = SigningKey::random(&mut thread_rng());
     let verifying_key = signing_key.verifying_key();
@@ -12,6 +13,7 @@ pub fn generate_key_pair() -> (SigningKey, PublicKey<NistP256>) {
     (signing_key, public_key)
 }
 
+// Compute VRF with signing_key and input string, output verified random hash
 pub fn compute_vrf(signing_key: &SigningKey, input: &[u8]) -> Vec<u8> {
     let hash = Sha256::digest(input);
     let signature: Signature = signing_key.sign(&hash);
@@ -22,7 +24,7 @@ pub fn compute_vrf(signing_key: &SigningKey, input: &[u8]) -> Vec<u8> {
 }
 
 
-
+// Verify VRF result by public key and input string
 pub fn verify_vrf(public_key: &PublicKey<NistP256>, input: &[u8], proof: &[u8]) -> bool {
     let hash = Sha256::digest(input);
     let verifying_key = VerifyingKey::from(public_key.clone());

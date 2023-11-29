@@ -89,11 +89,13 @@ The --nocapture flag is used with cargo test to allow the print statements to be
 ## Regression Fit Curves
 
 Here are the regression fit curves generated from the mock data:
-### Tesing in 10,000 times
-![Regression Fit Curve 1 - Tesing in 10,000 times](./images/uvrf-10_000.png)
-### Tesing in 100,000 times
-![Regression Fit Curve 2 - Tesing in 100,000 times](./images/uvrf-100_000.png)
 
+![Regression Fit Curve 1 - Tesing in 10,000 times](./images/uvrf-10_000.png)
+### Tesing in 10,000 times
+![Regression Fit Curve 2 - Tesing in 100,000 times](./images/uvrf-100_000.png)
+### Tesing in 100,000 times
+![Regression Fit Curve 2 - Tesing in 100,000 times](./images/uvrf-1_000_000.png)
+### Tesing in 1M times
 
 ## Contributing
 Contributions to this project are welcome! Please feel free to submit issues and pull requests.

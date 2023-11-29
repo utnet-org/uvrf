@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use std::fs;
 // ... other imports ...
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct Candidate {
     pub address: String,  // Ethereum address as a hex string
     pub power: u32,       // Renamed from 'weight' to 'power'
@@ -21,19 +21,25 @@ pub fn generate_random_value_vrf(sk: &SigningKey, input: &[u8]) -> Vec<u8> {
     compute_vrf(sk, input)
 }
 
-use std::convert::TryInto;
 
 // Convert hash to number
 pub fn hash_to_number(hash: &[u8]) -> u32 {
-    let (int_bytes, _) = hash.split_at(std::mem::size_of::<u32>());
-    u32::from_ne_bytes(int_bytes.try_into().unwrap())
+    let mut num = 0u32;
+
+    for &byte in hash {
+        num = num.wrapping_shl(8) | u32::from(byte);
+    }
+
+    num
 }
+
 
 // Choose candidate base on random number and weights of candidates
 pub fn choose_candidate_vrf(candidates: &[Candidate], random_number: u32) -> Option<&Candidate> {
 
     // Get total weight of all the candidates
     let total_weight: u32 = candidates.iter().map(|c| c.power).sum();
+    let mut last_weighted_sum = 0;
     let mut weighted_sum = 0;
 
     // Get a target number that can pick from 0 ~ total_weight
@@ -42,9 +48,10 @@ pub fn choose_candidate_vrf(candidates: &[Candidate], random_number: u32) -> Opt
     // Line candidate * power and get the candidate by target number
     for candidate in candidates {
         weighted_sum += candidate.power;
-        if target < weighted_sum {
+        if target >= last_weighted_sum && target < weighted_sum {
             return Some(candidate);
         }
+        last_weighted_sum = weighted_sum;
     }
 
     None

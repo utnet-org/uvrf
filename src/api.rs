@@ -8,6 +8,7 @@ use crate::Candidate;  // Assuming Candidate struct is defined in this module
 #[derive(Serialize)]
 struct ApiResponse<'a> {
     public_key: String,
+    vrf_input: String, 
     selected_candidate: &'a Candidate,
 }
 
@@ -27,6 +28,7 @@ pub async fn get_candidates() -> impl Responder {
     if let Some(selected_candidate) = choose_candidate_vrf(&candidates, random_number) {
         HttpResponse::Ok().json(ApiResponse {
             public_key: format!("{:?}", pk),
+            vrf_input: format!("{:?}", vrf_input), 
             selected_candidate, // No clone needed
         })
     } else {

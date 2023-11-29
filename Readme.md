@@ -78,7 +78,7 @@ Candidates are stored in a JSON file in the following format:
 [
     {"address": "0x123...", "power": 2},
     {"address": "0x456...", "power": 5},
-    ...
+    "..."
 ]
 ```
 
@@ -123,15 +123,17 @@ Here are the regression fit curves generated from the mock data:
 
 **Response Fields**:
 - `public_key`: The public key associated with the selection process.
+- `vrf_input`: The input used to generate the VRF output.
 - `selected_candidate`: The candidate selected in the process.
 
 **Example Response**:
 ```json
 {
   "public_key": "Public key here",
+  "vrf_input": "VRF input here",
   "selected_candidate": {
     "address": "Candidate address here",
-    "power": Candidate power here
+    "power": "Candidate power here"
   }
 }
 ```

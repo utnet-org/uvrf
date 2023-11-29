@@ -86,6 +86,13 @@ cargo test -- --nocapture test_vrf_random_selection_from_file
 ```
 The --nocapture flag is used with cargo test to allow the print statements to be displayed on the console. By default, cargo test captures output from test functions, and this flag disables that behavior.
 
+## Regression Fit Curves
+
+Here are the regression fit curves generated from the mock data:
+
+![Regression Fit Curve 1 - Tesing in 10,000 times](./images/uvrf-10_000.png)
+![Regression Fit Curve 2 - Tesing in 100,000 times](./images/uvrf-100_000.png)
+
 
 ## Contributing
 Contributions to this project are welcome! Please feel free to submit issues and pull requests.

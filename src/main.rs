@@ -5,7 +5,7 @@ mod weighted_selection;
 
 fn main() {
    let candidates = generate_mock_candidates(100);
-    let selection_counts = run_selections(&candidates, 10_000);
+    let selection_counts = run_selections(&candidates, 1_000_000);
     // let selection_counts_standard = run_selections_standard_random(&candidates, 10_000);
 
     // Export to CSV

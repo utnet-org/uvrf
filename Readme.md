@@ -40,6 +40,15 @@ To run tests, use the following Cargo command:
 ```bash
 cargo test
 ```
+
+### Running Main Function
+
+To run main function, use the following Cargo command:
+
+```bash
+cargo run
+```
+
 ## Usage
 
 The main functionalities include key pair generation for VRF, computation of VRF, and the verification of the VRF output. Additionally, the repository provides functionality to read a list of candidates from a JSON file and select one based on their weighted power.
@@ -125,7 +134,7 @@ Here are the regression fit curves generated from the mock data:
     "power": Candidate power here
   }
 }
-
+```
 
 ## Contributing
 Contributions to this project are welcome! Please feel free to submit issues and pull requests.

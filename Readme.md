@@ -1,12 +1,12 @@
 # VRF-Based Weighted Random Selection
 
-This repository contains an implementation of a Verifiable Random Function (VRF) in Rust, used for weighted random selection among a list of candidates. Each candidate has a unique Ethereum address and a corresponding power (weight), determining their likelihood of being selected.
+This repository contains an implementation of a Verifiable Random Function (VRF) in Rust, used for weighted random selection among a list of candidates. Each candidate has a unique Utility address and a corresponding power (weight), determining their likelihood of being selected.
 
 ## Features
 
 - **VRF Implementation**: Utilizes Elliptic Curve Cryptography for generating verifiable random outputs.
 - **Weighted Random Selection**: Candidates are selected based on their assigned powers, with higher power increasing the chance of selection.
-- **Ethereum Address Support**: Candidates are identified by Ethereum addresses.
+- **Utility Address Support**: Candidates are identified by Utility addresses.
 
 ## Getting Started
 
@@ -100,6 +100,32 @@ Here are the regression fit curves generated from the mock data:
 
 ![Regression Fit Curve 2 - Tesing in 100,000 times](./images/uvrf-1_000_000.png)
 <p align="center">Tesing in 1M times</p>
+
+
+## API Documentation
+
+### Get Selected Candidates
+
+**URL**: `/get_candidates`
+
+**Method**: `GET`
+
+**Response Format**: JSON
+
+**Response Fields**:
+- `public_key`: The public key associated with the selection process.
+- `selected_candidate`: The candidate selected in the process.
+
+**Example Response**:
+```json
+{
+  "public_key": "Public key here",
+  "selected_candidate": {
+    "address": "Candidate address here",
+    "power": Candidate power here
+  }
+}
+
 
 ## Contributing
 Contributions to this project are welcome! Please feel free to submit issues and pull requests.

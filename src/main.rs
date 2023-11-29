@@ -2,18 +2,19 @@ use vrf::generate_key_pair;
 use weighted_selection::{read_candidates_from_file, generate_random_value_vrf, hash_to_number, choose_candidate_vrf, Candidate};
 mod vrf;
 mod weighted_selection;
+use actix_web::{web, App, HttpServer};
+mod api; // Importing the API module
 
 fn main() {
-   let candidates = generate_mock_candidates(100);
-    let selection_counts = run_selections(&candidates, 1_000_000);
-    // let selection_counts_standard = run_selections_standard_random(&candidates, 10_000);
+    // let candidates = generate_mock_candidates(100);
+    // let selection_counts = run_selections(&candidates, 1_000_000);
 
-    // Export to CSV
-    export_to_csv(&candidates, &selection_counts, "output.csv")
-        .expect("Failed to export to CSV");
+    // // Export to CSV
+    // export_to_csv(&candidates, &selection_counts, "output.csv")
+    //     .expect("Failed to export to CSV");
 
     // // Read candidates from json file
-    // let candidates = read_candidates_from_file("/Library/WebServer/Documents/uvrf/src/Candidates.json")
+    // let candidates = read_candidates_from_file("Candidates.json")
     //     .expect("Failed to read candidates");
 
     // // Generate ECC key pairs
@@ -31,6 +32,16 @@ fn main() {
     // } else {
     //     println!("No candidate was selected");
     // }
+
+    #[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| {
+        App::new().route("/get_candidates", web::get().to(api::get_candidates))
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
+}
 }
 
 pub fn generate_mock_candidates(num_candidates: usize) -> Vec<Candidate> {
